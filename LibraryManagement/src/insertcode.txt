@@ -1,0 +1,41 @@
+ if(jTextField1.getText().equals("")||jTextField2.getText().equals("")||jTextField3.getText().equals("")){
+ javax.swing.JOptionPane.showMessageDialog(null, "All fields are not available");
+}
+   else{
+       
+    String name = jTextField1.getText();
+    String id = jTextField2.getText();
+    String dept = jTextField3.getText();
+    
+     try {  
+         
+	            Class.forName("com.mysql.jdbc.Driver");
+	            String connectionUrl = "jdbc:mysql://localhost:3306/student?" + "user=root&password=";
+	            Connection con = null;
+                    con = DriverManager.getConnection(connectionUrl);
+                    System.out.println("Successful");
+                    
+                 Statement stmt = null;
+                 stmt = con.createStatement ();
+
+                //stmt.executeUpdate(sql);
+                 
+               String sql = "insert into studentinsert values ('"+name+"','"+id+"','"+dept+"')";
+                stmt.executeUpdate(sql); 
+                //javax.swing.JOptionPane.showMessageDialog(null, name+" "+name+" has inserted to library.");    
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
+               
+                con.close();
+                stmt.close();
+          
+            }    // TODO add your handling code here:
+        catch (SQLException e) {
+	            System.out.println("SQL Exception: "+ e.toString());
+                    System.out.print("SQL ");
+	        } 
+        catch (ClassNotFoundException cE) {
+	            System.out.println("Class Not Found Exception: "+ cE.toString());
+                      System.out.print("Class Not Found ");
+        }   }      // TODO add your handling code here:

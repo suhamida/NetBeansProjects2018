@@ -1,0 +1,38 @@
+ try {  
+            String user = username.getText();
+            String p = String.copyValueOf(jPasswordField1.getPassword());
+	            Class.forName("com.mysql.jdbc.Driver");
+	            String connectionUrl = "jdbc:mysql://localhost/library?" + "user=root&password=";
+	            Connection con = DriverManager.getConnection(connectionUrl);
+                    System.out.println("Successful");
+                    
+                    Statement stmt = null;
+            ResultSet rs = null;
+            //SQL query command
+            String SQL = "SELECT * FROM password where admin ='"+user+"' and password= '"+p+"'" ;
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(SQL);
+            if (rs.next()) {
+                
+                //new admin().setVisible(true);
+                this.setVisible(false);
+                new Working().setVisible(true);
+                //System.out.println(rs.getString("Product") + " : " + rs.getString("description"));
+              //  javax.swing.JOptionPane.showMessageDialog(null,rs.getString("Product") + " : " + rs.getString("description"));
+       //         jTextField1.setText(rs.getString("Product"));
+            }
+            else{
+            javax.swing.JOptionPane.showMessageDialog(null, "Wrong PassWord");
+  //          String strSQL = "INSERT INTO Products VALUES ('" + jTextField1.getText()+"','zzzz')";
+
+  //          int rowsEffected = stmt.executeUpdate(strSQL);
+
+            }
+           
+            }    // TODO add your handling code here:
+        catch (SQLException e) {
+	            System.out.println("SQL Exception: "+ e.toString());
+	        } 
+        catch (ClassNotFoundException cE) {
+	            System.out.println("Class Not Found Exception: "+ cE.toString());
+        }
